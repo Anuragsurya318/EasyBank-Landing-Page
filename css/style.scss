@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    body {
+        height: 100vh;
+        width: 100vw;
+        font-family: 'Public Sans', sans-serif;
+        font-size: 18px;
+        overflow-x: hidden;
+    }
+}
+
+$Grayish_Blue: hsl(233, 8%, 62%);
+$Light_Grayish_Blue: hsl(220, 16%, 96%);
+$Very_Light_Gray: hsl(0, 0%, 98%);
+$White: hsl(0, 0%, 100%);
+$Dark_Blue: hsl(233, 26%, 24%);
+$Lime_Green: hsl(136, 65%, 51%);
+$Bright_Cyan: hsl(192, 70%, 51%);
+
+
+
+.container {
+    padding: 0px 120px;
+
+    .header {
+        padding: 20px 0px 20px 0px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        height: 75px;
+
+
+        &__logo {}
+
+        &__menu {
+            li {
+                display: inline-block;
+                padding: 6px 10px;
+                font-size: 18px;
+                font-weight: 300;
+
+                &:hover {
+                    font-weight: 400;
+                    // text-decoration: underline;
+                    border-bottom: 2px solid $Lime_Green;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        &__btn {
+            padding: 7px 12px;
+            background: linear-gradient(to right, $Lime_Green, $Bright_Cyan);
+            border-radius: 20px;
+            border: none;
+            color: $White;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        &__toggleBtn {
+            display: none;
+        }
+    }
+
+    .main {
+        display: flex;
+        flex-direction: row;
+
+        .content {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            // align-items: center;
+
+            h1 {
+                font-size: 45px;
+                padding: 10px 0px;
+            }
+
+            p {
+                padding: 10px 0px;
+                line-height: 30px;
+            }
+
+            .btn2 {
+                @extend .header__btn;
+                width: fit-content;
+            }
+        }
+
+        .displayImage {
+            display: block;
+            width: 50%;
+        }
+
+        .displayImageIn {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .main2 {
+        display: flex;
+        flex-direction: column;
+        padding: 40px 0px;
+
+        .main2Content {
+            display: flex;
+            flex-direction: row;
+
+            h3 {
+                padding: 15px 0px;
+            }
+
+            .box {
+                height: 300px;
+                padding: 40px 10px;
+            }
+        }
+    }
+
+}
+
+$breakpoints : (mobile : 375px,
+    tablet : 768px,
+    desktop : 1440px,
+);
+
+
+@mixin query($screen) {
+
+    @each $key,
+    $value in $breakpoints {
+        @if($screen==$key) {
+            @media (max-width : $value) {
+                @content;
+            }
+        }
+    }
+}
+
+@include query(mobile) {
+    .header {
+        padding: 20px 5px;
+        height: 70px;
+
+        &__logo {
+            .image {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        &__menu {
+            ul {
+                display: none;
+            }
+        }
+
+        &__btn {
+            display: none;
+        }
+
+        &__toggleBtn {
+            display: block;
+            width: 15px;
+            height: 15px;
+            display: flex;
+            position: absolute;
+            right: 40px;
+        }
+    }
+}
+
+@include query(tablet) {
+    .container {
+
+        padding: 0px 20px;
+
+        .header {
+            padding: 20px 5px;
+            height: 70px;
+
+            &__logo {
+                .image {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+
+            &__menu {
+                ul {
+                    display: none;
+                }
+            }
+
+            &__btn {
+                display: none;
+            }
+
+            &__toggleBtn {
+                display: block;
+                width: 15px;
+                height: 15px;
+                display: flex;
+                position: absolute;
+                right: 40px;
+            }
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column-reverse;
+            text-align: center;
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .displayImage {
+                width: 100%;
+            }
+
+            .content {
+                width: 100%;
+            }
+        }
+
+        .main2 {
+            text-align: center;
+
+            .main2Content {
+                flex-direction: column;
+            }
+        }
+    }
+
+}
